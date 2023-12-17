@@ -2,6 +2,9 @@
   <main>
     <div class="overlay" v-if="showModal">
       <div class="modal">
+        <div class="header mb-4">
+          <h4>Create a New Note</h4>
+        </div>
         <textarea
           v-model="newNote"
           name="note"
@@ -9,8 +12,14 @@
           cols="30"
           rows="10"
         ></textarea>
-        <button @click="this.addNote">Add Note</button>
-        <button class="close" @click="showModal = false">Close</button>
+        <div class="d-flex flex-row justify-content-end mt-4">
+          <button class="btn btn-primary me-3" @click="this.addNote">
+            Add Note
+          </button>
+          <button class="btn btn-danger" @click="showModal = false">
+            Close
+          </button>
+        </div>
       </div>
     </div>
     <div class="container">
@@ -140,22 +149,6 @@ header button {
   position: relative;
   display: flex;
   flex-direction: column;
-}
-
-.modal button {
-  padding: 10px 20px;
-  font-size: 20px;
-  width: 100%;
-  background-color: blueviolet;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-top: 15px;
-}
-
-.modal .close {
-  background-color: rgb(193, 15, 15);
-  margin-top: 7px;
 }
 
 .main-text {
