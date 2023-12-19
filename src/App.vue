@@ -12,6 +12,7 @@
           cols="30"
           rows="10"
         ></textarea>
+        <p v-if="errorMessage">{{ errorMessage }}</p>
         <div class="d-flex flex-row justify-content-end mt-4">
           <button class="btn btn-primary me-3" @click="this.addNote">
             Add Note
@@ -52,6 +53,7 @@ export default {
 
   data() {
     return {
+      errorMessage: "",
       newNote: "",
       notes: [],
       showModal: false,
@@ -63,15 +65,20 @@ export default {
       return color;
     },
     addNote() {
-      const newNote = {
+      if (this.newNote.length < 10) {
+        this.errorMessage = "Please enter a minimum of 10 characters!";
+        return;
+      }
+
+      this.notes.push({
         id: Math.floor(Math.random() * 1000000),
         text: this.newNote,
         date: new Date(),
         backgroundColor: this.getRandomColor(),
-      };
-      this.notes.push(newNote);
+      });
       this.showModal = false;
       this.newNote = "";
+      this.noteError = ""; // Clear error after successful note addition
     },
   },
 };
@@ -143,6 +150,7 @@ header button {
 
 .modal {
   width: 750px;
+  height: 300px;
   background-color: white;
   border-radius: 10px;
   padding: 30px;
@@ -159,5 +167,9 @@ header button {
 .date {
   color: black;
   font-weight: 600;
+}
+
+.modal p {
+  color: red;
 }
 </style>
