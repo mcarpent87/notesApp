@@ -6,13 +6,13 @@
           <h4>Create a New Note</h4>
         </div>
         <textarea
-          v-model="newNote"
+          v-model.trim="newNote"
           name="note"
           id="note"
           cols="30"
           rows="10"
         ></textarea>
-        <p v-if="errorMessage">{{ errorMessage }}</p>
+        <p v-if="errorMessage" class="text-danger">{{ errorMessage }}</p>
         <div class="d-flex flex-row justify-content-end mt-4">
           <button class="btn btn-primary me-3" @click="this.addNote">
             Add Note
@@ -78,7 +78,8 @@ export default {
       });
       this.showModal = false;
       this.newNote = "";
-      this.noteError = ""; // Clear error after successful note addition
+      this.noteError = "";
+      this.errorMessage = "";
     },
   },
 };
@@ -167,9 +168,5 @@ header button {
 .date {
   color: black;
   font-weight: 600;
-}
-
-.modal p {
-  color: red;
 }
 </style>
